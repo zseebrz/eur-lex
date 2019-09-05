@@ -1,6 +1,8 @@
 # EUR-Lex
 Downloading, parsing, aggregating and visualizing data on EU legislation
 
+Repo forked from https://github.com/demetriodor/eur-lex/. The main change is that the web scraping scripts now run on Windows instead of Linux (wininet instead of libcurl) and they also extract the directory code from the metadata of the html files scraped from the Eur-Lex website.
+
 ![alt text](https://github.com/demetriodor/eur-lex/blob/master/figures/F1_noncom_dir_hd.png)
 
 
