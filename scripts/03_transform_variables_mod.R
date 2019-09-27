@@ -46,8 +46,11 @@ out <- out %>%
   )
 
 #write the result
-write.csv(out, './output_table/all_acts_2004-2019_preprocessed.csv')
-save(out, file='./output_table/all_acts_2004-2019_preprocessed.Rdata')
+write.csv(out, './output_table/all_acts_2004-2019_preprocessed_w_charcount_2.csv')
+#write.csv(out, './output_table/all_acts_2004-2019_preprocessed_w_charcount.csv')
+#write.csv(out, './output_table/all_acts_2004-2019_preprocessed.csv')
+save(out, file='./output_table/all_acts_2004-2019_preprocessed_w_charcount_2.Rdata')
+#save(out, file='./output_table/all_acts_2004-2019_preprocessed.Rdata')
 
 #filter variables and some values based on author
 out2<-out %>% 
@@ -55,8 +58,9 @@ out2<-out %>%
   filter (author2!='Other')
 
 #out2<-out
-write.csv(out2, './output_table/all_acts_2004-2019_f.csv')
-save(out2, file='./output_table/all_acts_2004-2019_f.Rdata')
+write.csv(out2, './output_table/all_acts_2004-2019_w_charcount2_filtered.csv')
+#write.csv(out2, './output_table/all_acts_2004-2019_f.csv')
+#save(out2, file='./output_table/all_acts_2004-2019_f.Rdata')
 
 #replacing eurovoc codes in the keywords.1 - keywords.26 fields with the actual keyword form an auxiliary table
 #doesn't work, will try in Python instead
@@ -80,6 +84,6 @@ new$toplevel_dircode <- lapply(eurlex_data$dircode, function(x) top_level$text[m
 new <- data.frame(lapply(new, as.character), stringsAsFactors=FALSE)
 
 #xlsx generation dies with out of memory error, only csv works
-write.xlsx(new, "C:/Users/admin/Dropbox/eurlex_data.xlsx")
+#write.xlsx(new, "C:/Users/admin/Dropbox/eurlex_data.xlsx")
 
 write.csv2(new,"C:/Users/admin/Dropbox/eurlex_data.csv", row.names = FALSE)

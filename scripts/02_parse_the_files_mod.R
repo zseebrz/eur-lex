@@ -9,6 +9,13 @@ get_dircode <- function(var_name, myxpath_dircode) {
     error=function(e){out[i,var_name] <<- NA})
 } 
 
+get_charcount <- function(var_name, myxpath) {
+  tryCatch(
+    out[i,var_name] <<- stri_length(str_c(html_text(html_nodes(h,xpath = myxpath)), sep = "", collapse = ', ')),
+    warning=function(w){out[i,var_name] <<- NA},
+    error=function(e){out[i,var_name] <<- NA})
+}
+
 ### Identify the files
 #docs <- list.files(path= './legal_acts/', pattern = "*.html", full.names=TRUE, recursive=TRUE)  
 #try first on a restricted set
@@ -53,8 +60,12 @@ for (i in 1:length(docs)){
     get_content('legal_basis', '//meta[@property="eli:based_on"]/@resource')
     
     get_dircode('dircode', '//div[@id="PPClass_Contents"]/div[@class="panel-body"]/dl[@class="NMetadata"]/*')
+    
+    get_charcount('charcount', '//div//p')
+    
+    get_charcount('charcount2', '//p[@class="normal"]')
 }
 
 #save the result
-write.csv(out, './output_table/all_acts_2004-2019.csv')
-save(out, file='./output_table/all_acts_2004-2019.Rdata')
+write.csv(out, './output_table/all_acts_2004-2019_w_charcount_2.csv')
+save(out, file='./output_table/all_acts_2004-2019_w_charcount_2.Rdata')
